@@ -2,6 +2,8 @@
 
 This is the source code for the web app at https://chocomega.github.io/stadia-games-history-www.
 
+The game is based on [Wiki History Game](https://github.com/tom-james-watson/wikitrivia) source code.
+
 ## Usage
 
 ### Prerequisites
