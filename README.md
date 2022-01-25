@@ -1,6 +1,6 @@
 # Stadia Game History
 
-This is the source code for the web app at https://wikitrivia.tomjwatson.com.
+This is the source code for the web app at https://chocomega.github.io/stadia-games-history-www.
 
 ## Usage
 
