@@ -49,19 +49,9 @@ export default function ItemCard(props: Props) {
     config: { mass: 5, tension: 750, friction: 100 },
   });
 
-  const type = React.useMemo(() => {
-    const safeDescription = item.description.replace(/ \(.+\)/g, "");
-
-    if (item.description.length < 60 && !/\d\d/.test(safeDescription)) {
-      return item.description.replace(/ \(.+\)/g, "");
-    }
-
-    if (item.instance_of.includes("human") && item.occupations !== null) {
-      return item.occupations[0];
-    }
-
-    return item.instance_of[0];
-  }, [item]);
+  const date = new Date(0); // The 0 there is the key, which sets the date to the epoch
+  date.setUTCSeconds(item.year);
+  const dateString = date.toLocaleString("en-US", { year: 'numeric', month: 'short', day: 'numeric' });
 
   return (
     <Draggable draggableId={item.id} index={index} isDragDisabled={!draggable}>
@@ -95,7 +85,6 @@ export default function ItemCard(props: Props) {
             >
               <div className={styles.top}>
                 <div className={styles.label}>{capitalize(item.label)}</div>
-                <div className={styles.description}>{capitalize(type)}</div>
               </div>
               <div
                 className={styles.image}
@@ -110,11 +99,7 @@ export default function ItemCard(props: Props) {
                 })}
               >
                 <span>
-                  {"played" in item
-                    ? item.year < -10000
-                      ? item.year.toLocaleString()
-                      : item.year.toString()
-                    : datePropIdMap[item.date_prop_id]}
+                  {"played" in item ? dateString : "???"}
                 </span>
               </animated.div>
             </animated.div>
@@ -129,13 +114,11 @@ export default function ItemCard(props: Props) {
             >
               <span className={styles.label}>{capitalize(item.label)}</span>
               <span className={styles.date}>
-                {capitalize(datePropIdMap[item.date_prop_id])}: {item.year}
+                {capitalize(datePropIdMap[item.date_prop_id])}: {dateString}
               </span>
-              <span className={styles.description}>{item.description}.</span>
+              <span className={styles.description}>{item.description}</span>
               <a
-                href={`https://www.wikipedia.org/wiki/${encodeURIComponent(
-                  item.wikipedia_title
-                )}`}
+                href={item.wikipedia_title}
                 className={styles.wikipedia}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -143,7 +126,7 @@ export default function ItemCard(props: Props) {
                   e.stopPropagation();
                 }}
               >
-                Wikipedia
+                Store page
               </a>
             </animated.div>
           </div>

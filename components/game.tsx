@@ -6,7 +6,6 @@ import createState from "../lib/create-state";
 import Board from "./board";
 import Loading from "./loading";
 import Instructions from "./instructions";
-import badCards from "../lib/bad-cards";
 
 export default function Game() {
   const [state, setState] = useState<GameState | null>(null);
@@ -16,22 +15,26 @@ export default function Game() {
 
   React.useEffect(() => {
     const fetchGameData = async () => {
-      const res = await axios.get<string>(
-        "https://wikitrivia-data.tomjwatson.com/items.json"
+      const stadiaGames = await axios.get<any>(
+        "https://raw.githubusercontent.com/ja1984/sogdb/master/data/games.json"
       );
-      const items: Item[] = res.data
-        .trim()
-        .split("\n")
-        .map((line) => {
-          return JSON.parse(line);
-        })
-        // Filter out questions which give away their answers
-        .filter((item) => !item.label.includes(String(item.year)))
-        // Filter cards which have bad data as submitted in https://github.com/tom-james-watson/wikitrivia/discussions/2
-        .filter((item) => !(item.id in badCards));
+      const items: Item[] = stadiaGames.data.games.map((game: any) => {
+        return {
+          date_prop_id:"P577",
+          description: game.description,
+          id: game.store_link,
+          image: game.image_slug,
+          instance_of: ['video game'],
+          label: game.name,
+          occupations: null,
+          page_views: 0,
+          wikipedia_title: game.store_link,
+          year: Math.floor(new Date(game.released).getTime() / 1000)
+        };
+      });
+    
       setItems(items);
     };
-
     fetchGameData();
   }, []);
 

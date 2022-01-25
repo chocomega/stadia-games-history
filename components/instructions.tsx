@@ -22,42 +22,32 @@ export default function Instructions(props: Props) {
         <Button onClick={start} text="Start game!" />
         <div className={styles.about}>
           <div>
-            All data sourced from{" "}
+            All data sourced from {" "}
             <a
-              href="https://www.wikidata.org"
+              href="https://github.com/ja1984/sogdb"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Wikidata
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://www.wikipedia.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Wikipedia
-            </a>
-            .
+              SOGDb
+            </a>.
           </div>
           <div>
-            Have feedback? Please report it on{" "}
+            Game based on {" "}
             <a
-              href="https://github.com/tom-james-watson/wikitrivia/issues/"
+              href="https://github.com/tom-james-watson/wikitrivia"
               target="_blank"
               rel="noopener noreferrer"
             >
-              GitHub
-            </a>
-            .
+              Wiki History Game
+            </a>.
           </div>
           <GitHubButton
-            href="https://github.com/tom-james-watson/wikitrivia"
+            href="https://github.com/chocomega/stadia-games-history"
             data-size="large"
-            data-show-count="true"
-            aria-label="Star tom-james-watson/wikitrivia on GitHub"
+            data-show-count="false"
+            aria-label="Star chocomega/stadia-games-history on GitHub"
           >
-            Star
+            GitHub
           </GitHubButton>
         </div>
       </div>

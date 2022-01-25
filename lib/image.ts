@@ -1,5 +1,3 @@
-export function createWikimediaImage(image: string, width = 300): string {
-  return `https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/${encodeURIComponent(
-    image
-  )}&width=${width}`;
+export function createWikimediaImage(image: string): string {
+  return `https://raw.githubusercontent.com/ja1984/sogdb/master/images/${image}.webp`;
 }
