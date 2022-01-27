@@ -1,4 +1,4 @@
-# Stadia Game History
+# Stadia Games History
 
 This is the source code for the web app at https://chocomega.github.io/stadia-games-history-www.
 
